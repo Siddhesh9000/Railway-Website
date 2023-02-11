@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <script>
+  function validate(){
+/*
+a
+abcf 
+^a 
+^abjnc
+a-c 
+a-cD-H
+^a-h 
+
+\w
+\W - ^(a-zA-Z0-9)
+\d 
+\D 
+\s - space tabs
+\S  
+*/
+
+
+/*
+
+
+/^
+\w+
+([\.-]?\w+)*
+@\w+
+([\.-]?\w+)*
+(\.\w{2,3} + $/
+
+
+ 
+nik-h-il@asjdajf.d.co.cutomer.ok-google.com  */
+
+
+
+
+var firstname = document.forms.signup_form.firstName.value;
+var lastname = document.forms.signup_form.lastName.value;
+var pass1 = document.forms.signup_form.password.value;
+var pass2 = document.forms.signup_form.rePassword.value;
+var email = document.forms.signup_form.email.value;
+var username=document.forms.signup_form.username.value;
+var phone=document.forms.signup_form.num.value;
+
+/*if(firstname == "")*/
+if(!/^[a-zA-Z]{10,}$/.test(firstname)){
+    window.alert("firstname not found");
+    firstname.focus();
+    //return false;
+}
+if (!/^[a-zA-Z]{15,}$/.test(lastname)) 
+    window.alert("lastname not found");
+    lastname.focus();
+alert('reached this output')
+}
+if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(pass1)) {
+    alert("invalid password");
+    pass1.focus();
+    //return false;
+}
+if(pass1 != pass2){
+    window.alert("passwords don't match");
+    //return false;
+}
+/*
+if (!/.test(email)){
+
+    window.alert("Invalid email address");
+    //return false;
+}
+*/
+if(username==""){
+    window.alert("username not found");
+    username.focus();
+}
+
+    if(phone == ""){
+    window.alert("Phone No. not found");
+    phone.focus(); 
+}
+if(phone.length < 8){
+    alert("invaalid phone No.");
+    phone.focus();
+}
+return true;
+} 
+        </script>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Register</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/styles.css"/>
+    </head>
+    <body>
+        <section class="register-background">
+            <div class="register-box">
+                <div class="container" id="register-container">
+                    <header class="header">
+                        <h1 class="heading">Sign Up</h1>
+                        <!-- 
+                        Username
+                        Password
+                        Confirm Password
+                         -->
+                        <a href="../html/login.html">
+                        </a>
+                    </header>
+
+                    <form class="relative" id="signup_form" onsubmit="validate()">
+                        <div class="flex-column">
+                            <h3>First Name</h3>
+                            <input type="text" name="firstName" id="firstName" placeholder="Enter first name" />
+                        </div>
+
+                        <div class="flex-column">
+                            <h3>Last Name</h3>
+                            <input type="text" name="lastName" id="lastName" placeholder="Enter last name" class="field" required/>
+                        </div>
+
+                        <div class="flex-column">
+                            <h3>Date Of Birth</h3>
+                            <input type="date" name="dob" id="dob" class="field" />
+                        </div>
+                        
+                        <div class="flex-column">
+                            <h3>Email</h3>
+                            <input type="email" name="email" id="email" placeholder="Enter email" class="field"/>
+                        </div>
+
+                        <div class="flex-column">
+                            <h3>Username</h3>
+                            <input type="text" name="username" id="username" placeholder="Enter username" class="field"/>
+                        </div>
+
+                        <div class="flex-column">
+                            <h3>Password</h3>
+                            <input type="password" name="password" id="password" placeholder="Enter password" class="field"/>
+                        </div>
+
+                        <div class="flex-column">
+                            <h3>Confirm Password</h3>
+                            <input type="password" name="rePassword" id="rePassword" placeholder="Confirm password" class="field"/>
+                        </div>
+
+                        <div class="flex-column">
+                            <h3>phone</h3>
+                            <input type="number" name="num" id="num" placeholder="phone" class="field" pattern="[0-9]{3}}-[0-9]{3}-[0-9]{4}" required/>
+                        </div>
+
+                        <div class="flex-column">
+                            <h3>User Type</h3>
+                            
+                            <div class="radio-container">
+                                <div>
+                                    <input type="radio" name="userType" id="user" value="user"/>
+                                    <label for="user" >User</label>
+                                </div>
+    
+                                <div>
+                                    <input type="radio" name="userType" id="admin" value="admin" />
+                                    <label for="admin">Admin</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="flex" id="btn">
+                        <button class="primary" name="submit" id="submit" onclick="validate()">
+                            Submit
+                        </button>
+                    </div>
+                    
+                </div>
+                    <p class="register">Already have an account?  
+                        <a class="link margin-left-5" href="../html/login.html">Sign In</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        
+        <script src="../scripts/register.js" type="module"></script>
+    </body>
+</html>
