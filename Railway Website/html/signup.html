@@ -47,18 +47,26 @@ var email = document.forms.signup_form.email.value;
 var username=document.forms.signup_form.username.value;
 var phone=document.forms.signup_form.num.value;
 
-/*if(firstname == "")*/
+if(firstname == ""){
+    window.alert("firstname not found");
+    firstname.focus();  
+}
 if(!/^[a-zA-Z]{10,}$/.test(firstname)){
     window.alert("firstname not found");
     firstname.focus();
-    //return false;
 }
+if (lastname== ""){
+    window.alert("lastname not found");
+    lastname.focus();
+
 if (!/^[a-zA-Z]{15,}$/.test(lastname)) 
     window.alert("lastname not found");
     lastname.focus();
-alert('reached this output')
 }
-if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(pass1)) {
+//alert('reached this output');
+  
+
+if (!/^[a-zA-Z\d]{8,}$/.test(pass1)) {
     alert("invalid password");
     pass1.focus();
     //return false;
@@ -67,28 +75,35 @@ if(pass1 != pass2){
     window.alert("passwords don't match");
     //return false;
 }
-/*
-if (!/.test(email)){
 
-    window.alert("Invalid email address");
-    //return false;
+if(email == ""){
+    window.alert("email not found");
+    email.focus();  
 }
-*/
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    window.alert("Invalid email address");
+    email.focus();
+}
+
 if(username==""){
     window.alert("username not found");
     username.focus();
 }
 
-    if(phone == ""){
+if(phone == ""){
     window.alert("Phone No. not found");
     phone.focus(); 
 }
-if(phone.length < 8){
-    alert("invaalid phone No.");
+if(/^[6-9]\d{9}$/.test(phone)){
+    alert("correct ph no");
+    phone.focus();
+}
+else if(!/^?([\d]{3})?[-]?([\d]{3})?[-]?([\d]{4})$/.test(phone)){
+    alert("Invalid phone number.(2)");
     phone.focus();
 }
 return true;
-} 
+}
         </script>
 
         <meta charset="utf-8">
@@ -151,7 +166,7 @@ return true;
 
                         <div class="flex-column">
                             <h3>phone</h3>
-                            <input type="number" name="num" id="num" placeholder="phone" class="field" pattern="[0-9]{3}}-[0-9]{3}-[0-9]{4}" required/>
+                            <input type="text" name="num" id="num" placeholder="phone" class="field" pattern="[0-9]{3}}-[0-9]{3}-[0-9]{4}" required/>
                         </div>
 
                         <div class="flex-column">
