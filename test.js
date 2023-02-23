@@ -65,28 +65,55 @@ app.post("/login", (req,res) => {
 })
 
 
+// app.post("/Register", (req,res) => {
+//     console.log("Request Received")
+//     // console.log(req)
+//     const train7= req.body.train
+//     console.log(train7)
+
+//     const insquery = "insert into dummy (train) values (?)"
+//     insertquery =mysql.format(insquery, [train7])
+
+//     db.getConnection(async (err,connection) => {
+//         if (err) throw(err)
+//         console.log("Databse  was found at port" + port1)
+
+//         await connection.query(insertquery, async (err, result) => {
+//             connection.release()
+
+//             if(err) throw(err)
+//             else{
+//                 console.log("success")
+//             }
+//         })
+//     })
+// })
+
+
+
+
+
 app.post("/Register", (req,res) => {
     console.log("Request Received")
-    console.log(req)
+    // console.log(req)
     const train7= req.body.train
     console.log(train7)
-    console.log("traiin8997")
 
-    const query = "insert into dummy (train) values (?)"
-    insertquery =mysql.format(query, [train7])
+    const delquery = "DELETE  FROM dummy  where train= ? "
+    deletequery =mysql.format(delquery, [train7])
 
     db.getConnection(async (err,connection) => {
         if (err) throw(err)
-            console.log("Databse  was found at port" + port1)
+        console.log("Databse  was found at port" + port1)
 
-            await connection.query(insertquery, async (err, result) => {
-                connection.release()
+        await connection.query(deletequery, async (err, result) => {
+            connection.release()
 
-                if(err) throw(err)
-                else{
-                    console.log("1253214156")
-                }
-
+            if(err) throw(err)
+            else{
+                console.log("successfully deleted")
+            }
         })
     })
 })
+
