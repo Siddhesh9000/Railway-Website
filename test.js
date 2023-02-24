@@ -248,3 +248,47 @@ app.post("/Register588", (req, res) => {
     });
   });
 });
+
+
+
+app.post("/Register108", (req, res) => {
+  console.log("Request Received");
+  console.log(req);
+  const firstn = req.body.firstname;
+  const lastn  =req.body.lastname;
+  const emailid=req.body.email;
+  const user   =req.body.username;
+  const pass   =req.body.password;
+  const phoneno  =req.body.phone;
+
+  console.log(firstn,lastn,emailid,user,pass,phoneno);
+  
+  const query = "SELECT * FROM irctc_train WHERE firstname = ?";
+  searchquery = mysql.format(query, [firstn]);
+
+  db.getConnection(async (err, connection) => {
+    if (err) throw err;
+    console.log("db was found at port " + port1);
+
+    await connection.query(searchquery, async (err, result) => {
+      if (err) throw (err);
+
+      await connection.query(searchquery, async (err, result) => {
+        if (err) throw err;
+        else {
+          if (result.length == 0) {
+            let insertquery = "INSERT INTO irctc_train (firstname) VALUES (?)";
+            insertquery = mysql.format(insertquery, [firstn]);
+
+            await connection.query(insertquery, async (err, result) => {
+              connection.release();
+              if (err) throw (err);
+              else {
+                console.log("successfully added");
+              }
+            })}
+
+          }});
+
+        });
+      })})
