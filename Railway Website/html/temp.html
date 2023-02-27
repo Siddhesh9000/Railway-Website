@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html >
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Register</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+
+        function validatef(){
+        window.alert("func called");
+          
+        var firstname = document.forms.signup_form.firstName.value;
+        var lastname = document.forms.signup_form.lastName.value;
+        var pass1 = document.forms.signup_form.password.value;
+        var email = document.forms.signup_form.email.value;
+        var username=document.forms.signup_form.username.value;
+        var phone=document.forms.signup_form.num.value;
+          
+        window.alert("func called");
+        
+        if(firstname == ""){
+            window.alert("firstname not found");
+            firstname.focus();  
+        }
+        if(!/^[a-zA-Z]{10,}$/.test(firstname)){
+            window.alert("firstname not found");
+            firstname.focus();
+        }
+        if (lastname== ""){
+            window.alert("lastname not found");
+            lastname.focus();
+        }
+        if (!/^[a-zA-Z]{15,}$/.test(lastname)) {
+            window.alert("lastname not found");
+            lastname.focus();
+        }
+        //alert('reached this output');
+        
+        
+        if (!/^[a-zA-Z\d]{8,}$/.test(pass1)) {
+            alert("invalid password");
+            pass1.focus();
+            //return false;
+        }
+        if(pass1 != pass2){
+            window.alert("passwords don't match");
+            //return false;
+        }
+        
+        if(email == ""){
+            window.alert("email not found");
+            email.focus();  
+        }
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+            window.alert("Invalid email address");
+            email.focus();
+        }
+        
+        if(username==""){
+            window.alert("username not found");
+            username.focus();
+        }
+        
+        if(phone == ""){
+            window.alert("Phone No. not found");
+            phone.focus(); 
+        }
+        if(/^[6-9]\d{9}$/.test(phone)){
+            alert("correct ph no");
+            phone.focus();
+        }
+        else if(!/^?([\d]{3})?[-]?([\d]{3})?[-]?([\d]{4})$/.test(phone)){
+            alert("Invalid phone number.(2)");
+            phone.focus();
+        }
+        return true;
+        }
+
+    </script>
+    </head>
+
+    <body>
+        <form name ="signup_form" id="signup_form" method="post" action="http://127.0.0.1:3000/Register" onsubmit="return validatef()">
+            <h3>First Name</h3>
+                <input type="text" name="firstName" id="firstName" placeholder="Enter first name" />
+            <h3>Last Name</h3>
+                <input type="text" name="lastName" id="lastName" placeholder="Enter last name"/>
+            <h3>Email</h3>
+                <input type="email" name="email" id="email" placeholder="Enter email" />
+            <h3>Username</h3>
+                <input type="text" name="username" id="username" placeholder="Enter username"/>
+            <h3>Password</h3>
+                <input type="password" name="password" id="password" placeholder="Enter password" />
+                <input type = 'submit' name = 'submit' id = 'submit'/>
+        </form>
+    </body>
+</html>

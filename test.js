@@ -251,7 +251,7 @@ app.post("/Register588", (req, res) => {
 
 
 
-app.post("/Register108", (req, res) => {
+app.post("/registerUser", (req, res) => {
   console.log("Request Received");
   console.log(req);
   const firstn = req.body.firstname;
@@ -263,8 +263,8 @@ app.post("/Register108", (req, res) => {
 
   console.log(firstn,lastn,emailid,user,pass,phoneno);
   
-  const query = "SELECT * FROM irctc_train WHERE firstname = ?";
-  searchquery = mysql.format(query, [firstn]);
+  const query = "SELECT * FROM irctc_train WHERE username = ?";
+  searchquery = mysql.format(query, [user]);
 
   db.getConnection(async (err, connection) => {
     if (err) throw err;
@@ -277,8 +277,8 @@ app.post("/Register108", (req, res) => {
         if (err) throw err;
         else {
           if (result.length == 0) {
-            let insertquery = "INSERT INTO irctc_train (firstname) VALUES (?)";
-            insertquery = mysql.format(insertquery, [firstn]);
+            let insertquery = "INSERT INTO irctc_train (firstname,lastname,email,username,passwd,phone) VALUES (?,?,?,?,?,?)";
+            insertquery = mysql.format(insertquery, [firstn,lastn,emailid,user,pass,phoneno]);
 
             await connection.query(insertquery, async (err, result) => {
               connection.release();

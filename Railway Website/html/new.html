@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEWPAGE</title>
+    <script>
+      function validateform() {
+        var firstname = document.spform.firstname.value;
+        var lastname = document.spform.lastname.value;
+        var password = document.spform.password.value;
+        var email = document.spform.email.value;
+        var username = document.spform.username.value;
+        var phone = document.spform.phone.value;
+
+        if (firstname == null || firstname == "") {
+          alert("firstName can't be blank");
+          return false;
+        } else if (!/^[a-zA-Z]{2,}$/.test(firstname)) {
+          alert("firstname must have atleast 2 characters");
+          return false;
+        } else if (lastname == null || lastname == "") {
+          alert("lastName can't be blank");
+          return false;
+        } else if (!/^[a-zA-Z]{5,}$/.test(lastname)) {
+          alert("lastname must have atleast 5 characters");
+          return false;
+        } else if (password == null || password == "") {
+          alert("password must not be empty");
+          return false;
+        } else if (email == null || email == "") {
+          alert("email can't be blank");
+          return false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          alert("invalid email");
+          return false;
+        } else if (username == null || username == "") {
+          alert("username not found");
+          return false;
+        } else if (!/^[0-9A-Za-z_]{6,}$/.test(username)) {
+          alert("username not valid");
+          return false;
+        } else if (phone == null || phone == "") {
+          alert("phone can't be blank");
+          return false;
+        } else if (/^[6-9]\d{9}$/.test(phone)) {
+          alert("correct phone number");
+          return false;
+        } else
+         return true;
+      }
+    </script>
+  </head>
+  <body>
+    <form
+      name="spform"
+      method="post"
+      action="http://127.0.0.1:3000/registerUser"
+      onsubmit="return validateform()"
+    >
+      firstName: <input type="text" name="firstname" /><br />
+      lastname: <input type="text" name="lastname" /><br />
+      Password: <input type="password" name="password" /><br />
+      email: <input type="text" name="email" /><br />
+      username:<input type="text" name="username" /><br />
+      phone: <input type="text" name="phone" /><br />
+      <input type="submit" value="register" />
+    </form>
+  </body>
+</html>
