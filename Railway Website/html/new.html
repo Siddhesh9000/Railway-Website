@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NEWPAGE</title>
+    <title>Register</title>
+    <link rel="stylesheet" href="../css/newstyle.css">
     <script>
       function validateform() {
         var firstname = document.spform.firstname.value;
@@ -29,12 +30,14 @@
         } else if (password == null || password == "") {
           alert("password must not be empty");
           return false;
-        } else if (email == null || email == "") {
+        } else if (email == null ) {
           alert("email can't be blank");
           return false;
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          /*
+        } else if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) {
           alert("invalid email");
           return false;
+          */
         } else if (username == null || username == "") {
           alert("username not found");
           return false;
@@ -53,19 +56,59 @@
     </script>
   </head>
   <body>
-    <form
+    <section class="register-background">
+      <div class="register-box">
+          <div class="container" id="register-container">
+              <header class="header">
+                  <h1 class="heading">Sign Up</h1>
+                  <a href="../html/login.html">
+                  </a>
+                </header>
+    <form class="relative"  id="spform"
       name="spform"
       method="post"
-      action="http://127.0.0.1:3000/registerUser"
-      onsubmit="return validateform()"
-    >
-      firstName: <input type="text" name="firstname" /><br />
-      lastname: <input type="text" name="lastname" /><br />
-      Password: <input type="password" name="password" /><br />
-      email: <input type="text" name="email" /><br />
-      username:<input type="text" name="username" /><br />
-      phone: <input type="text" name="phone" /><br />
-      <input type="submit" value="register" />
+      action="http://127.0.0.1:3000/registerIrctc"
+      onsubmit="return validateform()">
+    
+ <div class="flex-column">
+  <h3>firstname</h3>
+  <input type="text" name="firstname" placeholder="Enter firstname" id="firstname"/><br />
+ </div>
+    <div class="flex-column">
+      <h3>lastname</h3>
+      <input type="text" name="lastname" placeholder="Enter lastname" id="lastname"/><br />
+    </div>
+
+    <div class="flex-column">
+      <h3>password</h3>
+     <input type="password" name="password" placeholder="Enter password" id="password"/><br />
+    </div>
+  <div class="flex-column">
+    <h3>email</h3>
+       <input type="text" name="email" placeholder="Enter email" id="email"/><br />
+    </div>
+
+    <div class="flex-column">
+      <h3>username</h3>
+      <input type="text" name="username" placeholder=" Enter username" id="email"/><br />
+    </div>
+    <div class="flex-column">
+      <h3>phone</h3>
+      <input type="text" name="phone" placeholder="Enter phone No" id="phone"/><br />
+    </div>
+    <div class="flex" id="btn">
+      <input type="submit" class="primary" value="register" id="submit" />
+    </div>
+    </div>
+    </div>
     </form>
+
+  </div >
+  <p class="register" style="color: white;">Already have an account?  
+      <a class="link margin-left-5" href="../html/login.html" style="color: #008b8b;">Sign In</a>
+  </p>
+</div>
+</div>
+</section>
   </body>
 </html>

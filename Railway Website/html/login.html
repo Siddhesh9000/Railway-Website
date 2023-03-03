@@ -7,6 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../css/index2.css">
+    <script>
+        function validateform() {
+            var username = document.loginform.username.value;
+            var password = document.loginform.password.value;
+
+
+            if (username == null || username == "") {
+                alert("username not found");
+                return false;
+            } else if (!/^[0-9A-Za-z_]{6,}$/.test(username)) {
+                alert("username not valid");
+                return false;
+            } else if (password == null || password == "") {
+                alert("password must not be empty");
+                return false;
+            } else
+                return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -20,7 +39,7 @@
                     an
                     account</a></div>
             <br>
-           <!-- <form name="loginform" id="loginform "action="http://127.0.0.1:3000/login", method="POST">-->
+            <form name="loginform" id="loginform " action="http://127.0.0.1:3000/loginnewtable" , method="POST" onsubmit="return validateform()">
                 <div class="field email">
                     <div class="input-area">
                         <input type="text" placeholder="username" name="username" id="username">
@@ -39,7 +58,7 @@
                         </div>
 
                         <input type="submit" name="send" id="send" value="Sign in" />
-                       
+
                         <br>
                         <!-- <div class="register-btn">
                             <button class="btn" type="submit"><a href="./Table.html"> Log in </a></button>
@@ -49,5 +68,4 @@
 
 </body>
 
-</html>    
-
+</html>

@@ -292,3 +292,87 @@ app.post("/registerUser", (req, res) => {
 
         });
       })})
+
+
+
+      
+app.post("/registerIrctc", (req, res) => {
+  console.log("Request Received");
+  console.log(req);
+  const firstn = req.body.firstname;
+  const lastn  =req.body.lastname;
+  const emailid=req.body.email;
+  const user   =req.body.username;
+  const pass   =req.body.password;
+  const phoneno  =req.body.phone;
+
+  console.log(firstn,lastn,emailid,user,pass,phoneno);
+  
+  const query = "SELECT * FROM newtrainTable WHERE username = ?";
+  searchquery = mysql.format(query, [user]);
+
+  db.getConnection(async (err, connection) => {
+    if (err) throw err;
+    console.log("db was found at port " + port1);
+
+    await connection.query(searchquery, async (err, result) => {
+      if (err) throw (err);
+
+      await connection.query(searchquery, async (err, result) => {
+        if (err) throw err;
+        else {
+          if (result.length == 0) {
+            let insertquery = "INSERT INTO newtrainTable (firstname,lastname,email,username,passwd,phone) VALUES (?,?,?,?,?,?)";
+            insertquery = mysql.format(insertquery, [firstn,lastn,emailid,user,pass,phoneno]);
+
+            await connection.query(insertquery, async (err, result) => {
+              connection.release();
+              if (err) throw (err);
+              else {
+                console.log("successfully added");
+              }
+            })}
+
+          }});
+
+        });
+      })})
+
+
+      app.post("/loginnewtable", (req, res) => {
+        console.log("Request Received");
+        console.log(req);
+        const user   =req.body.username;
+        const pass   =req.body.password;
+        console.log(user,pass);
+        
+        const query = "SELECT * FROM newtrainTable WHERE username = ?";
+        searchquery = mysql.format(query, [user]);
+      
+        db.getConnection(async (err, connection) => {
+          if (err) throw err;
+          console.log("db was found at port " + port1);
+      
+          await connection.query(searchquery, async (err, result) => {
+            if (err) throw (err);
+      
+            await connection.query(searchquery, async (err, result) => {
+              if (err) throw err;
+              else {
+                if (result.length == 0) {
+                  let insertquery = "INSERT INTO newtrainTable (username,passwd) VALUES (?,?)";
+                  insertquery = mysql.format(insertquery, [user,pass]);
+      
+                  await connection.query(insertquery, async (err, result) => {
+                    connection.release();
+                    if (err) throw (err);
+                    else {
+                      console.log("successfully added");
+                    }
+                  })}
+      
+                }});
+      
+              });
+            })})
+      
