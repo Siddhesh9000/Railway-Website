@@ -30,7 +30,7 @@
         } else if (password == null || password == "") {
           alert("password must not be empty");
           return false;
-        } else if (email == null ) {
+        } else if (email == "ok") {
           alert("email can't be blank");
           return false;
           /*
@@ -67,7 +67,7 @@
     <form class="relative"  id="spform"
       name="spform"
       method="post"
-      action="http://127.0.0.1:3000/registerIrctc"
+      action="http://127.0.0.1:3000/RegisterFinal"
       onsubmit="return validateform()">
     
  <div class="flex-column">
@@ -85,7 +85,7 @@
     </div>
   <div class="flex-column">
     <h3>email</h3>
-       <input type="text" name="email" placeholder="Enter email" id="email"/><br />
+       <input type="email" name="email" placeholder="Enter email" id="email"/><br />
     </div>
 
     <div class="flex-column">

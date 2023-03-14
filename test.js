@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const bcrypt = require("bcrypt");
 
 const mysql = require("mysql");
 // const nodemon = require("nodemon");
@@ -38,6 +39,7 @@ app.post("/login", (req, res) => {
   console.log(req);
   const user = req.body.username;
   const pwrd = req.body.password;
+
   console.log(user, pwrd);
 
   const query = "SELECT * FROM user WHERE username = ?";
@@ -55,10 +57,11 @@ app.post("/login", (req, res) => {
         console.log("user not exist");
       } else {
         console.log(result);
-        if (result[0].password == pwrd) {
-          alert("logged in succesffuly");
+          if (await bcrypt.compare(pwrd, result[0].passwd)) {   //result[0].passwd,pwrd)
+            console.log("correct")
+          // app.post('/Railway Website/html/Homepage.html')
         } else {
-          alert("wrong password");
+          console.log("wrong password");
         }
       }
     });
@@ -376,3 +379,55 @@ app.post("/registerIrctc", (req, res) => {
               });
             })})
       
+
+
+            app.post("/RegisterFinal", (req, res) => {
+              console.log("Request Received");
+              console.log(req);
+              const firstn1 = req.body.firstname;
+              const lastn1  =req.body.lastname;
+              const emailid1=req.body.email;
+              const user1   =req.body.username;
+              const pass1   =req.body.password;
+              const phoneno1  =req.body.phone;
+
+              console.log("pass");
+            
+              const query = "SELECT * FROM user WHERE username = ?";
+              searchquery = mysql.format(query, [user1]);
+
+            
+              db.getConnection(async (err, connection) => {
+                if (err) throw err;
+                console.log("Databse  was found at port" + port1);
+            
+                await connection.query(searchquery, async (err, result) => {
+                  if (err) throw err;
+                  else {
+                    if (result.length == 0) {
+
+                      hashedpass = await bcrypt.hash(pass1,10);
+                      console.log(hashedpass)
+                      let insertquery1 = "INSERT INTO user (firstname,lastname,email,username,passwd,phone) VALUES (?,?,?,?,?,?)";
+                        insertquery1 = mysql.format(insertquery1, [firstn1,lastn1,emailid1,user1,hashedpass,phoneno1]);
+            
+                      await connection.query(insertquery1, async (err, result) => {
+                        connection.release();
+                        if (err) throw err;
+                        else {
+                          console.log("Added to database");
+                        }
+                      });
+                    } else {
+                      console.log("Already exists");
+                      connection.release();
+                    }
+                  }
+                });
+              });
+            });
+
+
+
+
+            
