@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HomePage</title>
-    <link rel="stylesheet" href="../css/Homepage.css">
+    <title>Live table</title>
 </head>
 <body>
-    <div class="container">
-       <!--- <form name="registerform" id="registerform" action="127.0.0.1:3000/register" method="post">-->
-            <div class="field email">
-                <div class="input">
-                    <input type="text" placeholder="insert" name="insert" >
-                </div>
-                <br>
-            
-                    <input type="submit" name="send" id="send" value="REGISTER" />
-                    <br>
-       
-        <input type="text" class="searchBar" placeholder="Search">
-        <div class="userIcon" onclick="window.location.href='login.html'">
-      </div>   
-    </FORM>
+    <label for="train-number">Enter train number:</label>
+<input type="text" id="train-number">
+
+<button onclick="bookSeat()">Book a seat</button>
+
+<p id="available-seats">Available seats: 130</p>
+
+
+<script>
+    function bookSeat() {
+      const availableSeatsElement = document.getElementById("available-seats");
+      let availableSeats = Number(availableSeatsElement.innerText.split(": ")[1]);
+      
+      if (availableSeats > 0) {
+        availableSeats--;
+        availableSeatsElement.innerText = `Available seats: ${availableSeats}`;
+        alert("Seat booked successfully!");
+      } else {
+        alert("Sorry, there are no available seats on this train.");
+      }
+    }
+  </script>
 </body>
 </html>
+
+

@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
-const bcrypt = require("bcrypt");
+//const bcrypt = require("bcrypt");
 
 const mysql = require("mysql");
-// const nodemon = require("nodemon");
+ //const nodemon = require("nodemon");
 
 require("dotenv").config({ path: "./data.env" });
 
@@ -33,6 +33,12 @@ const db = mysql.createPool({
 //     if(err) throw (err)
 //     console.log('db was found at port ' + port1)
 // })
+
+const userReq = require('./Railway Website/routes/user')
+app.use('/user', userReq )
+
+
+//app.use('/trains', train)
 
 app.post("/login", (req, res) => {
   console.log("req recieved");
@@ -68,29 +74,29 @@ app.post("/login", (req, res) => {
   });
 });
 
-// app.post("/Register", (req,res) => {
-//     console.log("Request Received")
-//     // console.log(req)
-//     const train7= req.body.train
-//     console.log(train7)
+app.post("/Register", (req,res) => {
+    console.log("Request Received")
+    // console.log(req)
+    const train7= req.body.train
+    console.log(train7)
 
-//     const insquery = "insert into dummy (train) values (?)"
-//     insertquery =mysql.format(insquery, [train7])
+    const insquery = "insert into dummy (train) values (?)"
+    insertquery =mysql.format(insquery, [train7])
 
-//     db.getConnection(async (err,connection) => {
-//         if (err) throw(err)
-//         console.log("Databse  was found at port" + port1)
+    db.getConnection(async (err,connection) => {
+        if (err) throw(err)
+        console.log("Databse  was found at port" + port1)
 
-//         await connection.query(insertquery, async (err, result) => {
-//             connection.release()
+        await connection.query(insertquery, async (err, result) => {
+            connection.release()
 
-//             if(err) throw(err)
-//             else{
-//                 console.log("success")
-//             }
-//         })
-//     })
-// })
+            if(err) throw(err)
+            else{
+                console.log("success")
+            }
+        })
+    })
+})
 
 app.post("/Register", (req, res) => {
   console.log("Request Received");
@@ -251,7 +257,6 @@ app.post("/Register588", (req, res) => {
     });
   });
 });
-
 
 
 app.post("/registerUser", (req, res) => {
